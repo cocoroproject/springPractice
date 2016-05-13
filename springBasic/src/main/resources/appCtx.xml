@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="memberDao" class="kosta.spring.MemberDao"></bean>
+	
+	<bean id="memberRegSvc" class="kosta.spring.MemberRegisterService">
+		<constructor-arg ref="memberDao"/>
+	</bean>
+	
+	<bean id="memberPrinter" class="kosta.spring.MemberPrinter"></bean>
+	
+	<bean id="listPrinter" class="kosta.spring.MemberListPrinter">
+		<constructor-arg name="memberDao" ref="memberDao"/>
+		<constructor-arg name="printer" ref="memberPrinter" />
+	</bean>
+	
+	<bean id="changePwdSvc" class="kosta.spring.ChangePasswordService">
+		<property name="dao" ref="memberDao"/>
+	</bean>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
