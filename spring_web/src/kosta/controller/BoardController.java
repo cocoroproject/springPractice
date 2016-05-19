@@ -47,6 +47,12 @@ public class BoardController {
 		return "redirect:/board_list";
 	}
 	
+	@RequestMapping("/spring_ajax")
+	public String spring_ajax(){
+		return "/view/getSearchResult.jsp";
+	}
+	
+	
 	@RequestMapping("/board_list")
 	public String board_list(Model model){
 		List<Board> list = dao.listBoard();

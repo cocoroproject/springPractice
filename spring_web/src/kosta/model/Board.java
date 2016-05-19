@@ -15,7 +15,7 @@ public class Board implements Serializable {
 	private String title;
 	
 	@NotEmpty(message="반드시 작성자를 입력하세요.")
-	@Pattern(regexp="[0-9a-zA-Z가-힣]", message="특수문자 입력금지")
+//	@Pattern(regexp="[0-9a-zA-Z가-힣]", message="특수문자 입력금지")
 	private String writer;
 	
 	
