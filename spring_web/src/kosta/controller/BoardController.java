@@ -32,7 +32,7 @@ public class BoardController {
 	@RequestMapping(value="/board_insert", method=RequestMethod.GET)
 	public String insert_form(Model model){
 		model.addAttribute("title","글쓰기폼");  // 뷰에 가지고 갈 데이터값
-		return "/view/insert_form.jsp";  //  뷰의 이름
+		return "insert_form";  //  뷰의 이름
 	}
 	
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
@@ -40,7 +40,7 @@ public class BoardController {
 		
 		if(errors.hasErrors())
 		{
-			return "/view/insert_form.jsp";
+			return "insert_form";
 		}
 		
 		dao.board_insert(board);
@@ -51,7 +51,7 @@ public class BoardController {
 	public String board_list(Model model){
 		List<Board> list = dao.listBoard();
 		model.addAttribute("list", list);
-		return "/view/list.jsp";
+		return "list";
 		
 	}
 	
@@ -61,7 +61,7 @@ public class BoardController {
 		Board board = dao.getBoard(seq);
 		model.addAttribute("board", board);
 		
-		return "/view/board_detail.jsp";
+		return "board_detail";
 	}
 	
 	@RequestMapping("/update_form{seq}")
@@ -69,7 +69,7 @@ public class BoardController {
 		@PathVariable int seq, Model model){
 		Board board = dao.getBoard(seq);
 		model.addAttribute("board", board);
-		return "/view/update_form.jsp";
+		return "update_form";
 	}
 	
 	@RequestMapping("/update_board")
