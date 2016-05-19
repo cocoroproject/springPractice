@@ -26,9 +26,21 @@
  	
  <!--DB 셋팅 --> 	
  	<!-- jdbcTemplate 객체 얻어오기 -->
- 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
  		<property name="dataSource" ref="dataSource"/>
- 	</bean>	
+ 	</bean>	   --> 	
+ 	
+ 	<!-- mabatis sqlSessionTemplate 만들기 -->
+ 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+ 		<constructor-arg name="sqlSessionFactory" ref="sqlSession"/>
+ 	</bean>
+ 	
+ 	<!-- sqlSession 객체 얻어오기 -->
+ 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+ 		<property name="dataSource" ref="dataSource"/>
+ 		<property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>
+ 	</bean>
+ 	
  	<!-- datasource 얻어오기 -->
  	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
  		<property name="jndiName" value="jdbc/oracle"/>

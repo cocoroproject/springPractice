@@ -4,20 +4,53 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import kosta.mapper.BoardMapper;
+
 @Repository
 public class BoardDao {
-	private JdbcTemplate myJdbcTemplate;
-
+	private SqlSessionTemplate myJdbcTemplate;
+	
 	@Autowired
-	public void setMyJdbcTemplate(JdbcTemplate myJdbcTemplate) {
+	public void setMyJdbcTemplate(SqlSessionTemplate myJdbcTemplate) {
 		this.myJdbcTemplate = myJdbcTemplate;
 	}
 
+	public void board_insert(Board board){
+		myJdbcTemplate.getMapper(BoardMapper.class).board_insert(board);
+	}
+	
+	public List<Board> listBoard(){
+		List<Board> list = myJdbcTemplate.getMapper(BoardMapper.class).listBoard();
+		return list;
+	}
+	
+	public Board getBoard(int seq){
+	   Board board = myJdbcTemplate.getMapper(BoardMapper.class).getBoard(seq);
+	   return board;
+	}
+	
+	public void updateBoard(Board board){
+		myJdbcTemplate.getMapper(BoardMapper.class).updateBoard(board);
+	}
+	
+	public void delete_form(int seq){
+		myJdbcTemplate.getMapper(BoardMapper.class).delete_form(seq);
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	/* jdbcTemplate 의 경우
 	public void insertBoard(Board board) {
 		String sql = "insert into board" + "(seq, title, writer, contents, regdate, hitcount) "
 				+ "values(board_seq.nextval, ?, ?, ?, sysdate, 0)";
@@ -88,5 +121,7 @@ public class BoardDao {
 		Object[] values = {seq};
 		
 		myJdbcTemplate.update(sql, values);
-	}
+	} 
+	
+	*/
 }

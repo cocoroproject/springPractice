@@ -2,10 +2,14 @@ package kosta.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,8 +36,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
-	public String board_insert(Board board){     //파라미터로 Board 객체를 써주면 인썰트에서 저절로 보드가 넘어옴
-		dao.insertBoard(board);
+	public String board_insert(@ModelAttribute("boardRequest") @Valid Board board, BindingResult errors){     //파라미터로 Board 객체를 써주면 인썰트에서 저절로 보드가 넘어옴
+		
+		if(errors.hasErrors())
+		{
+			return "/view/insert_form.jsp";
+		}
+		
+		dao.board_insert(board);
 		return "redirect:/board_list";
 	}
 	
