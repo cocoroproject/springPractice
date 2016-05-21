@@ -9,10 +9,10 @@
 	
 	<insert id="board_insert" parameterType="Board">
 		insert into board(
-			SEQ, TITLE, WRITER, CONTENTS, REGDATE, HITCOUNT
+			SEQ, TITLE, WRITER, CONTENTS, REGDATE, HITCOUNT, FILENAME
 		)
 		values(
-			BOARD_SEQ.NEXTVAL, #{title}, #{writer}, #{contents}, SYSDATE, 0
+			BOARD_SEQ.NEXTVAL, #{title}, #{writer}, #{contents}, SYSDATE, 0, #{filename}
 		)
 	</insert>
 	

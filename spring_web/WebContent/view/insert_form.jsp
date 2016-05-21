@@ -13,11 +13,12 @@
 <body>
 <h3>${title}</h3>
 <hr>
-<form action="board_insert" method="post">
+<form action="board_insert" method="post" enctype="multipart/form-data">
 	작성자 : <input type="text" name="writer">
 			<form:errors path="boardRequest.writer" cssClass="error"/><br>
 	제목 : <input type="text" name="title">
 			<form:errors path="boardRequest.title" cssClass="error"/><br>
+	파일 : <input type="file" name="uploadFile"/> <br>
 	내용 <br>
 	<textarea rows="6" cols="70" name="contents"></textarea>
 	<br>

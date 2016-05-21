@@ -22,7 +22,13 @@
 	<!-- scan 으로 객체를 생성하면 한번에 객체를 다 생성할 수 있다 -->
 	<context:annotation-config />
 	<context:component-scan base-package="kosta" />
+	
+	
+	<!-- File Up/Down Setting -->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
+	<bean id="downloadView" class="kosta.view.DownloadView"></bean>
 
 	<!-- Transaction Setting -->
 	
@@ -43,19 +49,25 @@
 		
 	<!-- Tiles Setting -->
 
-	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	<bean id="tilesConfigurer"  class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">   
+	 <!-- 톰캣실행시 scope는주석처리 해야함. 테스트실행시에만 scope 실행  scope="request"    -->
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles2def.xml</value>
 			</list>
 		</property>
 	</bean>
-
+	
+	<!-- DownloadView -->
+	<bean id="viewResolver3" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"></property>
+	</bean>
+	<!-- TilesView -->
 	<bean id="viewResolver2" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
 		<property name="order" value="1"/>
 	</bean>
-
+	<!-- General View -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="2"/>
 	</bean>
@@ -73,7 +85,8 @@
 	<!-- sqlSession 객체 얻어오기 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="/WEB-INF/mybatis-config.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />     <!-- 테스트 실행시 밑에 주석하고 이거 활성화 -->
+<!-- 		<property name="configLocation" value="/WEB-INF/mybatis-config.xml" />   -->
 	</bean>
 
 	<!-- datasource 얻어오기 -->

@@ -30,6 +30,10 @@
          <td>${board.title }</td>
       </tr>
       <tr>
+         <td>파일</td>
+         <td><a href="board_download?filename=${board.filename}">${board.filename}</a></td>
+      </tr>
+      <tr>
          <td>작성자</td>
          <td>${board.writer }</td>
       </tr>

@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Board implements Serializable {
 	private int seq, hitcount;
@@ -22,6 +23,23 @@ public class Board implements Serializable {
 	private String contents;
 	private String regdate;
 	
+	// 파일업로드
+	private MultipartFile uploadFile;
+	private String filename;
+	
+	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public int getSeq() {
 		return seq;
 	}
